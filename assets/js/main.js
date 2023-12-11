@@ -8,13 +8,17 @@ function updateProfileInfo(profileData) {
 
     const job = document.getElementById('profile.job')
     job.innerText = profileData.job
+    job.href = profileData.job
 
     const location = document.getElementById('profile.location')
     location.innerText = profileData.location
 
     const phone = document.getElementById('profile.phone')
     phone.innerText = profileData.phone
-    phone.href = `tel:${profileData.phone}`
+    // Remover caracteres não numéricos
+    let numeros = profileData.phone.replace(/\D/g, '');
+    let telefoneTransformado = '55' + numeros;
+    phone.href = `https://web.whatsapp.com/send?phone=${telefoneTransformado}&text=Ola,%20gostaria%20de%20participar%20de%20uma%20entrevista%3F`
 
     const email = document.getElementById('profile.email')
     email.innerText = profileData.email
