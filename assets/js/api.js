@@ -1,7 +1,17 @@
 
 async function fetchProfileData() {
-    const url = 'https://raw.githubusercontent.com/digitalinnovationone/js-developer-portfolio/main/data/profile.json';
+    const url = 'https://api.github.com/users/fabioes99';
     const response = await fetch(url)
     const profileData = await response.json()
-    return profileData
+    const profileDataConverted = convertGithubInfoToModel(profileData)
+    return profileDataConverted 
+}
+
+
+async function fetchProfileDataGithub() {
+    const url = 'https://api.github.com/users/fabioes99/repos';
+    const response = await fetch(url)
+    const profileData = await response.json()
+    const profileDataConverted = convertGithubReposToModel(profileData)
+    return profileDataConverted 
 }

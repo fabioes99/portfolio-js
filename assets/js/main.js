@@ -1,4 +1,3 @@
-
 function updateProfileInfo(profileData) {
     const photo = document.getElementById('profile.photo')
     photo.src = profileData.photo
@@ -44,6 +43,7 @@ function updatePortfolio(profileData) {
             <li>
                 <h3 ${project.github ? 'class="github"' : ''}>${project.name}</h3>
                 <a href="${project.url}" target="_blank">${project.url}</a>
+                <p>Language: ${project.language} </p>
             </li>
         `
     }).join('')
@@ -62,12 +62,96 @@ function updateProfessionalExperience(profileData) {
     }).join('')
 }
 
+function convertGithubInfoToModel(githubInfo) {
+    const portfolio = new PortfolioModel()
+    portfolio.name = githubInfo.name
+    portfolio.photo = githubInfo.avatar_url
+    portfolio.job = 'https://www.linkedin.com/in/fabio-esferra-simoes-9a816a14a/'  
+    portfolio.location = githubInfo.location
+    portfolio.phone = '(15) 98154-4609'
+    portfolio.email = 'fabioes.99@outlook.com'
+
+    const skills = { 
+        "hardSkills": [
+          {
+            "name": "Laravel",
+            "logo": "data/imgs/laravel.png"
+          },
+          {
+            "name": "PHP",
+            "logo": "data/imgs/php.png"
+          },
+          {
+            "name": "Vue.js",
+            "logo": "data/imgs/vue.png"
+          },
+          {
+            "name": "React",
+            "logo": "data/imgs/react.png"
+          },
+          {
+            "name": "MySql",
+            "logo": "data/imgs/mysql.png"
+          },
+          {
+            "name": "Linux",
+            "logo": "data/imgs/linux.png"
+          }
+        ],
+        "softSkills": [
+            "Empatia",
+            "Lideran&ccedil;a",
+            "Trabalho em equipe",
+            "Flexibilidade",
+            "Organiza&ccedil;&atilde;o",
+            "Proatividade"
+        ]
+    }
+    const languages = [
+        "Portugu&ecirc;s BR",
+        "Ingl&ecirc;s (intermedi&aacute;rio)",
+        "Espanhol (iniciante)",
+    ]
+    const professionalExperience = [
+        {
+            "name": "Tech Lead - Grupo Well",
+            "period": "2023",
+            "description": "Foi um grande prazer liderar este time fantástico e poder contribuir com a transformação de tantas vidas."
+        },
+        {
+            "name": "Desenvolvedor - Grupo Well",
+            "period": "2021 - 2023",
+            "description": "Anos incríveis ao lado de pessoas maravilhosas ajudando muitas empresas por todo o mundo."
+        },
+        {
+            "name": "Estoquista - Assaí",
+            "period": "2019 - 2021",
+            "description": "Anos incríveis ao lado de pessoas maravilhosas."
+        }
+    ]
+
+    portfolio.skills = skills;
+    portfolio.languages = languages;
+    portfolio.professionalExperience = professionalExperience;
+
+    return portfolio
+}
+
+function convertGithubReposToModel(githubInfo){
+    const lista = githubInfo.map( (info) => { 
+        return { 'name': info.description, 'url': info.url , 'language': info.language }
+    } )
+    return { 'portfolio': lista };
+}
+
+
 (async () => {
     const profileData = await fetchProfileData()
+    const reposData = await fetchProfileDataGithub()
     updateProfileInfo(profileData)
     updateSoftSkills(profileData)
     updateHardSkills(profileData)
     updateLanguages(profileData)
-    updatePortfolio(profileData)
+    updatePortfolio(reposData)
     updateProfessionalExperience(profileData)
 })()
