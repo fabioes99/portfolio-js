@@ -116,17 +116,17 @@ function convertGithubInfoToModel(githubInfo) {
         {
             "name": "Tech Lead - Grupo Well",
             "period": "2023",
-            "description": "Foi um grande prazer liderar este time fantástico e poder contribuir com a transformação de tantas vidas."
+            "description": "Foi um grande prazer liderar este time fant&aacute;stico e poder contribuir com a transforma&ccedil;&atilde;o de tantas vidas."
         },
         {
             "name": "Desenvolvedor - Grupo Well",
             "period": "2021 - 2023",
-            "description": "Anos incríveis ao lado de pessoas maravilhosas ajudando muitas empresas por todo o mundo."
+            "description": "Anos incr&iacute;veis ao lado de pessoas maravilhosas ajudando muitas empresas por todo o mundo."
         },
         {
-            "name": "Estoquista - Assaí",
+            "name": "Estoquista - Assa&iacute;",
             "period": "2019 - 2021",
-            "description": "Anos incríveis ao lado de pessoas maravilhosas."
+            "description": "Anos incr&iacute;veis ao lado de pessoas maravilhosas."
         }
     ]
 
